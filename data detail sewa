@@ -1,9 +1,9 @@
-INSERT INTO detail_sewa (id_detail, id_sewa, id_game, id_konsol, lama_sewa, subtotal)
+INSERT INTO detail_sewa (id_detail, id_sewa, id_game, id_konsol, harga_satuan, subtotal)
 SELECT
     'D' || LPAD(i::text, 5, '0'),
     'S' || LPAD(((i - 1) % 10000 + 1)::text, 5, '0'),    -- mengacu ke id_sewa
     'G' || LPAD(((i - 1) % 1000 + 1)::text, 5, '0'),     -- game berulang 1–1000
     'K' || LPAD(((i - 1) % 100 + 1)::text, 5, '0'),      -- konsol berulang 1–100
-    (i % 5 + 1),                                         -- lama sewa 1–5 hari
-    (CASE WHEN i % 2 = 0 THEN 50000 ELSE 40000 END) * (i % 5 + 1)  -- subtotal berdasar tipe konsol & lama sewa
+    (CASE WHEN (i % 100) <= 50 THEN 50000 ELSE 40000 END),  -- harga satuan PS5=50000, PS4=40000
+    (CASE WHEN (i % 100) <= 50 THEN 50000 ELSE 40000 END) * (i % 5 + 1)  -- subtotal = harga_satuan × durasi
 FROM generate_series(1,10000) AS s(i);
