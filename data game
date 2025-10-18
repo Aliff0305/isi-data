@@ -1,0 +1,13 @@
+INSERT INTO game (id_game, nama_game, platform, kategori)
+SELECT 
+    'G' || LPAD(i::text, 5, '0'),
+    'Game_' || i,
+    CASE WHEN i % 2 = 0 THEN 'PS5' ELSE 'PS4' END,
+    CASE 
+        WHEN i % 5 = 0 THEN 'Action'
+        WHEN i % 5 = 1 THEN 'Adventure'
+        WHEN i % 5 = 2 THEN 'Racing'
+        WHEN i % 5 = 3 THEN 'Sport'
+        ELSE 'Horror'
+    END
+FROM generate_series(1,1000) AS s(i);
