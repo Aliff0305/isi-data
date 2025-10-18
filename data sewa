@@ -1,0 +1,10 @@
+INSERT INTO sewa (id_sewa, id_pelanggan, id_staff, id_konsol, tanggal_sewa, tanggal_kembali, total_harga)
+SELECT
+    'S' || LPAD(i::text, 5, '0'),
+    'P' || LPAD(((i - 1) % 100 + 1)::text, 5, '0'),     -- pelanggan bergantian dari P00001–P00100
+    'ST' || LPAD(((i - 1) % 10 + 1)::text, 5, '0'),     -- staff bergantian dari ST00001–ST00010
+    'K' || LPAD(((i - 1) % 100 + 1)::text, 5, '0'),     -- konsol bergantian dari K00001–K00100
+    CURRENT_DATE - (i % 30),                            -- tanggal sewa bervariasi 1–30 hari terakhir
+    CURRENT_DATE - (i % 30) + (i % 5 + 1),              -- tanggal kembali 1–5 hari setelah tanggal sewa
+    (CASE WHEN i % 2 = 0 THEN 50000 ELSE 40000 END) * (i % 5 + 1)  -- total harga berdasarkan lama sewa & tipe konsol
+FROM generate_series(1,10000) AS s(i);
