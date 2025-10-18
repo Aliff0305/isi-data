@@ -1,0 +1,9 @@
+INSERT INTO pembayaran (id_pembayaran, id_sewa, tanggal_pembayaran, jumlah_bayar, metode_pembayaran, status)
+SELECT
+    'PM' || LPAD(i::text, 5, '0'),
+    'S' || LPAD(((i - 1) % 10000 + 1)::text, 5, '0'),     -- terhubung ke id_sewa
+    CURRENT_DATE - (i % 30),                              -- tanggal pembayaran bervariasi 30 hari terakhir
+    (CASE WHEN i % 2 = 0 THEN 50000 ELSE 40000 END) * (i % 5 + 1), -- jumlah bayar sesuai lama sewa & tipe konsol
+    CASE WHEN i % 2 = 0 THEN 'Transfer' ELSE 'Cash' END,  -- metode pembayaran bergantian
+    CASE WHEN i % 10 = 0 THEN 'Belum Lunas' ELSE 'Lunas' END -- sebagian kecil belum lunas
+FROM generate_series(1,10000) AS s(i);
