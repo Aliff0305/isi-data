@@ -1,0 +1,17 @@
+-- ====================================
+-- FILE: staff.sql
+-- DESKRIPSI: Data dummy tabel STAFF
+-- JUMLAH DATA: 10
+-- ====================================
+
+INSERT INTO staff (id_staff, nama_staff, username, password, role) VALUES
+('ST00001','Rizky Saputra','rizky','123','Staff'),
+('ST00002','Taufik Hidayat','taufik','123','Administrator'),
+('ST00003','Dina Kartika','dina','123','Staff'),
+('ST00004','Andra Wijaya','andra','123','Staff'),
+('ST00005','Lina Marlina','lina','123','Staff'),
+('ST00006','Fikri Ramadhan','fikri','123','Staff'),
+('ST00007','Mira Ayu','mira','123','Administrator'),
+('ST00008','Yudi Pratama','yudi','123','Staff'),
+('ST00009','Salsa Fitriani','salsa','123','Staff'),
+('ST00010','Naufal Akbar','naufal','123','Staff');
